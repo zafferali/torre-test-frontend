@@ -1,10 +1,12 @@
 import Home from "./pages/Home"
+import UserSkills from "./pages/UserSkills"
 
 function App() {
 
   return (
    <div>
-    <Home />
+    {/* <Home /> */}
+    <UserSkills />
    </div>
   )
 }
