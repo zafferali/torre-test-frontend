@@ -19,10 +19,10 @@ function UserSkills() {
         </div>
 
         <div className='font-light'>
-            <h2 className='text-theme text-2xl text-center mb-4'>SKILLS AND INTERESTS</h2>
+            <h2 className='text-theme text-xl text-center mb-4'>SKILLS AND INTERESTS</h2>
             <div className='max-w-3xl mx-auto '>      
                 <Category skills={skills} heading="Master/Influencer"/>
-                <Category skills={skills1} heading="Expert"/>
+                <Category skills={skills} heading="Expert"/>
                 <Category skills={skills} heading="Proficient"/>
                 <Category skills={skills} heading="Beginner"/>
                 <Category skills={skills} heading="No experience, but interested"/>
