@@ -1,30 +1,32 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 function Home() {
-  const [username, setUsername] = useState('');
-  // const url = `http://127.0.0.1:8000/${username}`
-
-  const  submitHandler = async () => {
-    // const response = await axios.get(url)
-    // console.log(response.data)
-  }
+  const [username, setUsername] = useState("");
 
   return (
-    <div className='min-h-screen flex flex-col justify-center gap-6 items-center'>
-        <input
-            className='w-4/5 h-10 pl-6 border-2 rounded-md sm:max-w-md' 
-            type="text"
-            placeholder='Enter username here'
-            onChange={e => setUsername(e.target.value)}
-            value={username}
-        />
-        <button className='px-12 py-2 rounded-md bg-theme text-white' onClick={submitHandler}>
-            Submit
-        </button>
+    <div className="min-h-screen flex flex-col justify-center gap-6 items-center">
+      <h3 className="text-4xl">Find a User on Torre</h3>
+      <input
+        className="w-4/5 h-10 pl-6 border-2 rounded-md sm:max-w-md"
+        type="text"
+        placeholder="Enter username here"
+        onChange={(e) => setUsername(e.target.value)}
+        value={username}
+      />
+      <Link
+        to={username}
+        className="px-12 py-2 rounded-md bg-gradient-to-r from-sky-500 to-indigo-500 text-white"
+      >
+        Submit
+      </Link>
+      <div>
+        <p className="text-lg text-theme">
+          For example, search by using <span className="italic">zafferali</span>
+        </p>
+      </div>
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;
