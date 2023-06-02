@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 :root {
-    --primary-color:rgb(3 51 89);
+    --primary-color:#808080;
+    --text-color: 
+    font-family: 'Times New Roman', Times, serif;
   }
+img {
+  object-fit: cover;
+}  
  
