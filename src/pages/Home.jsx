@@ -1,13 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 
 
 
 function Home() {
-  
+   
     const [username, setUsername] = useState('');
+    // const url = `http://127.0.0.1:8000/${username}`
   
-    const submitHandler = () => {
+    const  submitHandler = async () => {
+      // const response = await axios.get(url)
+      // console.log(response.data)
       
     }
 
@@ -21,7 +26,7 @@ function Home() {
             value={username}
         />
         <button className='px-12 py-2 rounded-md bg-theme text-white' onClick={submitHandler}>
-          Submit
+            Submit
         </button>
     </div>
   )
