@@ -1,10 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Category from '../components/Category'
+import axios from 'axios'
 
 
 function UserSkills() {
-    const skills = ['Software development', 'Html', 'Css', 'Agile methodology', 'Python', 'Vue js']
-    const skills1 = ['Software development', 'Html', 'Css', 'Agile methodology']
+    const username = "zafferali"
+    const url = `https://torre-test-backend.vercel.app/${username}`
+    const [user, setUser] = useState(null)
+    const skills = ['1', '2', '3']
+
+    async function getUser() {
+        const response = await axios.get(url)
+        if (response.status == 200) {
+            setUser(response.data)
+        }
+    } 
+
+    useEffect( () => {
+        getUser()
+
+    },[])
+
+    console.log("User", user);
 
   return (
     <div className='min-h-screen text-theme px-3'>
