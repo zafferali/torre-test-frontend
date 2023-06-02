@@ -46,11 +46,11 @@ function UserSkills() {
       <Header />
       {loading ? (
         <div className="flex justify-center mt-4">
-          <h2 className="text-xl font-bold">Loading</h2>
+          <h2 className="text-xl font-bold">Loading...</h2>
         </div>
       ) : error ? (
         <div className="flex justify-center mt-4">
-          <p className="text-2xl text-red-500">User not found</p>
+          <p className="text-2xl text-red-500">User not found!</p>
         </div>
       ) : (
         <div className="min-h-screen text-theme px-3">

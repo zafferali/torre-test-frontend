@@ -8,7 +8,7 @@ function Category({ heading, skills = [] }) {
       {skills.length ? (
         <div className="flex gap-2 flex-wrap mb-5">
           {skills.map((skill, index) => (
-            <SkillTag key={index} tag={skill.name} />
+            <SkillTag key={index} tag={skill.name} recommendation={skill.recommendations} />
           ))}
         </div>
       ) : (
