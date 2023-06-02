@@ -1,53 +1,70 @@
 import React, { useEffect, useState } from 'react'
-import Category from '../components/Category'
+import { useLocation, useParams } from 'react-router-dom';
+import Category from '../components/Category';
 import axios from 'axios'
 
-
 function UserSkills() {
-    const username = "zafferali"
-    const url = `https://torre-test-backend.vercel.app/${username}`
-    const [user, setUser] = useState(null)
-    const skills = ['1', '2', '3']
+    const location = useLocation();
+    const url = `https://torre-test-backend.vercel.app${location.pathname}`;
+    const [user, setUser] = useState({});
+    const [error, setError] = useState(false);
 
-    async function getUser() {
-        const response = await axios.get(url)
-        if (response.status == 200) {
-            setUser(response.data)
+    const [loading, setLoading] = useState(false);
+
+    const getUser = async () => {
+        try {
+            setLoading(true); // Set loading before sending API request
+            const res = await axios.get(url);
+            setUser(res.data);
+            setLoading(false);
+        } catch (error) {
+            setLoading(false); // Stop loading in case of error
+            setError(true);
+            console.log("rr", error);
         }
-    } 
+    }
 
     useEffect( () => {
-        getUser()
+        getUser();
+    },[]);
 
-    },[])
-
-    console.log("User", user);
+    const master = user?.skills?.filter(skill => skill.proficiency == 'master');
+    const expert = user?.skills?.filter(skill => skill.proficiency == 'expert')
+    const proficient = user?.skills?.filter(skill => skill.proficiency == 'proficient')
+    const beginner = user?.skills?.filter(skill => skill.proficiency == 'novice')
+    const interested = user?.skills?.filter(skill => skill.proficiency == 'no-experience-interested')
 
   return (
+    <>{loading ? 
+    <div className="flex justify-center mt-4">
+        <h2 className="text-xl font-bold">Loading</h2>
+    </div> :
+    error ? <div className="flex justify-center mt-4">
+        <p className="text-2xl text-red-500">User not found</p>
+    </div> :
     <div className='min-h-screen text-theme px-3'>
         <div className='flex flex-col items-center'>
             <div className='w-32 h-32 mt-14 mb-4'>
                 <img 
                     className='w-full h-full object-top rounded-full'
-                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Profile" 
+                    src={user?.picture} alt="Profile" 
                 />
             </div>
-            <h1 className='font-bold text-3xl mb-8'>Zaffer Ali</h1>
+            <h1 className='font-bold text-3xl mb-8'>{user?.name}</h1>
         </div>
 
         <div className='font-light'>
             <h2 className='text-theme text-xl text-center mb-4'>SKILLS AND INTERESTS</h2>
-            <div className='max-w-3xl mx-auto '>      
-                <Category skills={skills} heading="Master/Influencer"/>
-                <Category skills={skills} heading="Expert"/>
-                <Category skills={skills} heading="Proficient"/>
-                <Category skills={skills} heading="Beginner"/>
-                <Category skills={skills} heading="No experience, but interested"/>
+            <div className='max-w-3xl mx-auto'>
+                <Category skills={master} heading="Master/Influencer"/>
+                <Category skills={expert} heading="Expert"/>
+                <Category skills={proficient} heading="Proficient"/>
+                <Category skills={beginner} heading="Beginner"/>
+                <Category skills={interested} heading="No experience, but interested"/>
             </div>
-
         </div>
-
-    </div>
+    </div>}
+    </>
   )
 }
 
